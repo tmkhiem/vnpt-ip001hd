@@ -1,0 +1,402 @@
+BCM74290010
+
+M0SCZSL2=1
+LLMB=0000C000
+BP=02000000
+L2Cfg=1E7AD627
+L2Buf=77707711
+BrCfg=F01C200E
+BrMod=02800801
+BrZp0=44008000
+BrZp1=00002000
+#@
+
+BCM97241B0 CFE v14.4, Endian Mode: Little
+Build Date: Tue Jan 19 14:52:40 ICT 2016 (thangnn@thangnn)
+Copyright (C) Broadcom Corporation.
+
+******************************************
+Automatic startup canceled via Ctrl-C
+******************************************
+
+ReShmoo MEMC0
+Initializing eMMC (v0.97). 2014.06.05.
+ ---> device is Sector mode eMMC (2th scan)
+
+ [Booting from eMMC BOOT1 Partition]
+ [eMMC Partition Information] : ReadBlkLen(512B)
+  Partition  :  Physical,   Logical
+  - Data     :  003776MB,  003776MB, Physical_SectorCount(7733248, 0x00760000)!
+  -  ENH Data:  000000MB,            Address(0x000000000000)!
+  - Boot1    :  000002MB,  001536KB + 256KB for BSEK reload!
+  - Boot2    :  000002MB,  001536KB + 256KB for BSEK reload!
+
+CPU speed:            1305MHz
+DDR Frequency:        928 MHz
+DDR Mode:             DDR3
+Total memory(MEMC 0): 1024MB
+MEMC 0 DDR Width:     32
+Boot Device:          EMMC
+Total flash:          3780MB
+RTS VERSION:          20130520182531_7241
+ETH0_PHY:             INT
+ETH0_MDIO_MODE:       1
+ETH0_SPEED:           100
+ETH0_PHYADDR:         1
+
+Initializing USB.
+
+CFE initialized.
+Starting splash screen.
+USB: New high speed device connected to bus 4 hub 1 port 1
+USB: Driver not found for 148f:5370
+Reading flash0.splash: 1078/3145728 bytes
+Bytes read: 1078 bytes
+Found splash image 0 - Width = 1280 Height = 720
+splashPitch = 2560, splashWidth = 1280, splashHeight=720 Pixel Format = 06e40565
+ bytesperpixel = 2
+
+CFE> printenv
+Variable Name        Value
+-------------------- --------------------------------------------------
+        BOOT_CONSOLE uart0
+ SPLASH_PART_STARTAD 228000
+    SPLASH_PART_SIZE 400000
+  LINUX_PART_STARTAD 628000
+     LINUX_PART_SIZE 1000000
+              SPLASH ENABLE
+            ETH0_PHY INT
+      ETH0_MDIO_MODE 1
+          ETH0_SPEED 100
+        ETH0_PHYADDR 1
+            STARTUP0 boot -z -elf flash0.kernel: 'bmem=192M@64M bmem=512M@512M'
+            STARTUP1 boot -z -elf flash0.recovery: 'bmem=192M@64M bmem=512M@512M'
+            STARTUP2 sleep 1000 && boot -z -elf usbdisk0:vmlinuz-7429b0 'rootwait root=/dev/sda2 bmem=192M@64M bmem=512M@512M rw init=/init'
+            BOOTMODE 0
+            CFE_FUSE 11
+         ETH0_HWADDR A0:65:18:8B:90:25
+          STB_SERIAL 0122403S1F8B9025
+         CHIP_SERIAL VNT0121S1F8B9025
+            MTDPARTS
+          DRAM0_SIZE 1024
+          FLASH_TYPE EMMC
+          FLASH_SIZE 3780
+         CFE_VERSION 14.4
+     CHIP_PRODUCT_ID 72410010
+       CFE_BOARDNAME BCM97241USFF
+      CFE_MEMORYSIZE 128
+*** command status = 0
+CFE> boot -z -elf flash0.kernel: 'bmem=192M@64M bmem=512M@512M init=/bin/sh'
+Loader:elf Filesys:raw Dev:flash0.kernel File: Options:bmem=192M@64M bmem=512M@512M init=/bin/sh
+Loading: 0x80001000/27297152 0x81a09580/100976 Entry address is 0x804459c0
+Starting program at 0x804459c0
+
+Linux version 3.3.8-3.3 (thangnn@thangnn) (gcc version 4.5.4 (Broadcom stbgcc-4.5.4-2.8) ) #71 SMP Tue May 15 10:02:48 +07 2018
+Fetching vars from bootloader... found 12 vars.
+Options: moca=0 sata=1 pcie=0 usb=1
+Using 1024 MB + 0 MB RAM (from CFE)
+bootconsole [early0] enabled
+CPU revision is: 00025a11 (Broadcom BMIPS5000)
+FPU revision is: 00130001
+Determined physical RAM map:
+ memory: 10000000 @ 00000000 (usable)
+ memory: 30000000 @ 20000000 (usable)
+bmem: adding 192 MB RESERVED region at 64 MB (0x0c000000@0x04000000)
+bmem: adding 512 MB RESERVED region at 512 MB (0x20000000@0x20000000)
+Initrd not found or empty - disabling initrd
+Zone PFN ranges:
+  Normal   0x00000000 -> 0x00050000
+Movable zone start PFN for each node
+Early memory PFN ranges
+    0: 0x00000000 -> 0x00010000
+    0: 0x00020000 -> 0x00050000
+PERCPU: Embedded 7 pages/cpu @82236000 s5504 r8192 d14976 u32768
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 259584
+Kernel command line: bmem=192M@64M bmem=512M@512M init=/bin/sh
+PID hash table entries: 4096 (order: 2, 16384 bytes)
+Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+Primary instruction cache 32kB, physically tagged, 4-way, linesize 64 bytes.
+Primary data cache 32kB, 4-way, linesize 32 bytes.
+MIPS secondary cache 256kB, 8-way, linesize 128 bytes.
+Memory: 291836k/1048576k available (4452k kernel code, 756740k reserved, 1014k data, 21192k init, 0k highmem)
+Hierarchical RCU implementation.
+NR_IRQS:160
+Measuring MIPS counter frequency...
+Detected MIPS clock frequency: 1305 MHz (163.135 MHz counter)
+Console: colour dummy device 80x25
+Calibrating delay loop... 869.37 BogoMIPS (lpj=434688)
+pid_max: default: 32768 minimum: 301
+Mount-cache hash table entries: 512
+SMP: Booting CPU1...
+CPU revision is: 00025a11 (Broadcom BMIPS5000)
+FPU revision is: 00130001
+Primary instruction cache 32kB, physically tagged, 4-way, linesize 64 bytes.
+Primary data cache 32kB, 4-way, linesize 32 bytes.
+MIPS secondary cache 256kB, 8-way, linesize 128 bytes.
+SMP: CPU1 is running
+Brought up 2 CPUs
+devtmpfs: initialized
+NET: Registered protocol family 16
+USB0: power enable is active low; overcurrent is active low
+USB1: power enable is active low; overcurrent is active low
+bio: create slab <bio-0> at 0
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+cfg80211: Calling CRDA to update world regulatory domain
+Switching to clocksource wktmr
+NET: Registered protocol family 2
+IP route cache hash table entries: 8192 (order: 3, 32768 bytes)
+TCP established hash table entries: 32768 (order: 6, 262144 bytes)
+TCP bind hash table entries: 32768 (order: 6, 262144 bytes)
+TCP: Hash tables configured (established 32768 bind 32768)
+TCP reno registered
+UDP hash table entries: 512 (order: 2, 16384 bytes)
+UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+NET: Registered protocol family 1
+NTFS driver 2.1.30 [Flags: R/W].
+fuse init (API version 7.18)
+msgmni has been set to 569
+io scheduler noop registered
+io scheduler cfq registered (default)
+Serial: 8250/16550 driver, 4 ports, IRQ sharing disabled
+console [ttyS0] enabled, bootconsole disabled 52) is a 16550A
+console [ttyS0] enabled, bootconsole disabled
+serial8250.0: ttyS1 at MMIO 0x10406740 (irq = 53) is a 16550A
+serial8250.0: ttyS2 at MMIO 0x10406780 (irq = 54) is a 16550A
+brd: module loaded
+loop: module loaded
+ahci: SSS flag set, parallel bus scan disabled
+ahci strict-ahci.0: AHCI 0001.0300 32 slots 3 ports 6 Gbps 0x3 impl platform mode
+ahci strict-ahci.0: flags: sntf stag clo pmp slum part
+scsi0 : ahci_platform
+scsi1 : ahci_platform
+scsi2 : ahci_platform
+ata1: SATA max UDMA/133 mmio [mem 0x10181000-0x10190fff] port 0x100 irq 33
+ata2: SATA max UDMA/133 mmio [mem 0x10181000-0x10190fff] port 0x180 irq 33
+ata3: DUMMY
+brcmstb_nand: NAND controller driver is loaded
+bcmgenet: configuring instance #0 for internal PHY
+bcmgenet bcmgenet.0: eth0: link down
+ata1: SATA link down (SStatus 0 SControl 300)
+No PHY detected, not registering interface:1
+bcmgenet: probe of bcmgenet.1 failed with error -5
+pegasus: v0.6.14 (2006/09/27), Pegasus/Pegasus II USB Ethernet driver
+usbcore: registered new interface driver pegasus
+usbcore: registered new interface driver asix
+usbcore: registered new interface driver cdc_ether
+usbcore: registered new interface driver net1080
+usbcore: registered new interface driver cdc_subset
+usbcore: registered new interface driver zaurus
+usbcore: registered new interface driver cdc_ncm
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+ehci-brcm ehci-brcm.0: Broadcom STB EHCI
+ehci-brcm ehci-brcm.0: new USB bus registered, assigned bus number 1
+ehci-brcm ehci-brcm.0: irq 56, io mem 0x10480300
+ehci-brcm ehci-brcm.0: USB 0.0 started, EHCI 1.00
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 1 port detected
+ehci-brcm ehci-brcm.1: Broadcom STB EHCI
+ehci-brcm ehci-brcm.1: new USB bus registered, assigned bus number 2
+ehci-brcm ehci-brcm.1: irq 57, io mem 0x10480500
+ata2: SATA link down (SStatus 0 SControl 300)
+ehci-brcm ehci-brcm.1: USB 0.0 started, EHCI 1.00
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 1 port detected
+ehci-brcm ehci-brcm.2: Broadcom STB EHCI
+ehci-brcm ehci-brcm.2: new USB bus registered, assigned bus number 3
+ehci-brcm ehci-brcm.2: irq 61, io mem 0x10490300
+ehci-brcm ehci-brcm.2: USB 0.0 started, EHCI 1.00
+hub 3-0:1.0: USB hub found
+hub 3-0:1.0: 1 port detected
+ehci-brcm ehci-brcm.3: Broadcom STB EHCI
+ehci-brcm ehci-brcm.3: new USB bus registered, assigned bus number 4
+ehci-brcm ehci-brcm.3: irq 62, io mem 0x10490500
+ehci-brcm ehci-brcm.3: USB 0.0 started, EHCI 1.00
+hub 4-0:1.0: USB hub found
+hub 4-0:1.0: 1 port detected
+ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+ohci-brcm ohci-brcm.0: Broadcom STB OHCI
+ohci-brcm ohci-brcm.0: new USB bus registered, assigned bus number 5
+ohci-brcm ohci-brcm.0: irq 58, io mem 0x10480400
+hub 5-0:1.0: USB hub found
+hub 5-0:1.0: 1 port detected
+ohci-brcm ohci-brcm.1: Broadcom STB OHCI
+ohci-brcm ohci-brcm.1: new USB bus registered, assigned bus number 6
+ohci-brcm ohci-brcm.1: irq 59, io mem 0x10480600
+hub 6-0:1.0: USB hub found
+hub 6-0:1.0: 1 port detected
+ohci-brcm ohci-brcm.2: Broadcom STB OHCI
+ohci-brcm ohci-brcm.2: new USB bus registered, assigned bus number 7
+ohci-brcm ohci-brcm.2: irq 63, io mem 0x10490400
+usb 3-1: new high-speed USB device number 2 using ehci-brcm
+hub 7-0:1.0: USB hub found
+hub 7-0:1.0: 1 port detected
+ohci-brcm ohci-brcm.3: Broadcom STB OHCI
+ohci-brcm ohci-brcm.3: new USB bus registered, assigned bus number 8
+ohci-brcm ohci-brcm.3: irq 64, io mem 0x10490600
+hub 8-0:1.0: USB hub found
+hub 8-0:1.0: 1 port detected
+Initializing USB Mass Storage driver...
+usbcore: registered new interface driver usb-storage
+USB Mass Storage support registered.
+mousedev: PS/2 mouse device common for all mice
+sdhci: Secure Digital Host Controller Interface driver
+sdhci: Copyright(c) Pierre Ossman
+sdhci-pltfm: SDHCI platform and OF driver helper
+sdhci-brcmstb sdhci-brcmstb.0: Enabling controller
+mmc0: SDHCI controller on sdhci-brcmstb.0 [sdhci-brcmstb.0] using ADMA
+sdhci-brcmstb sdhci-brcmstb.1: Enabling controller
+mmc1: SDHCI controller on sdhci-brcmstb.1 [sdhci-brcmstb.1] using ADMA
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+TCP cubic registered
+NET: Registered protocol family 17
+lib80211: common routines for IEEE802.11 drivers
+PM: CP0 COUNT/COMPARE frequency does not depend on divisor
+warning: unable to build a flash partition map, using entire device
+EBI CS0: setting up NOR flash (primary)
+physmap platform flash device: 04000000 at 1c000000
+brcm_suspend_init:4439
+
+Freeing unused kernel memory: 21192k freed
+starting pid 492, tty '': '/etc/init.d/rcS'
+Mounting virtual filesystems
+Starting mdev
+* WARNING: THIS STB CONTAINS GPLv3 SOFTWARE
+* GPLv3 programs must be removed in order to enable security.
+* See: http://www.gnu.org/licenses/gpl-faq.html#Tivoization
+Configuring eth0 interface
+mmc1: new high speed MMC card at address 0001
+mmcblk0: mmc1:0001 004GE0 3.68 GiB
+mmcblk0boot0: mmc1:0001 004GE0 partition 1 2.00 MiB
+mmcblk0boot1: mmc1:0001 004GE0 partition 2 2.00 MiB
+ mmcblk0: p1 p2
+ mmcblk0boot1: unknown partition table
+ mmcblk0boot0: unknown partition table
+Configuring lo interface
+Starting network services
+Starting user services
+EXT4-fs (mmcblk0p1): warning: maximal mount count reached, running e2fsck is recommended
+EXT4-fs (mmcblk0p1): 1 orphan inode deleted
+EXT4-fs (mmcblk0p1): recovery complete
+EXT4-fs (mmcblk0p1): mounted filesystem with ordered data mode. Opts: (null)
+EXT4-fs (mmcblk0p2): warning: maximal mount count reached, running e2fsck is recommended
+EXT4-fs (mmcblk0p2): recovery complete
+EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)
+update_result: 1
+Lastest update OK!
+ifconfig: SIOCSIFMTU: No such device
+ Start update CFE and Fuse
+CFE_FUSE
+ CFE_FUSE = 11
+
+CFE & Fuse already were updated.
+bcmdriver: module license 'Proprietary' taints kernel.
+Disabling lock debugging due to kernel taint
+BCMDRV: Initializing bcmdriver version $ $
+BCMDRV: Total intc words=3,Total Irqs=97
+BCMDRV: Initialization complete
+TRELLIS: Starting exec 'platform_service -ir none -standby_timeout 1 -sd on -karaoke '...
+    00:00:00.255 BHDM_PRIV: HDMI Tx Phy CK and CH2 signals will be swapped
+TRELLIS: Starting exec 'application_masterservice --Trellis::LaunchParameters::applicationType doc --Trellis::LaunchParameters::applicationMime text/html --Trellis::LaunchParameters::applicationURL file:///usr/local/vnpt/apps/configuration/configuration.html'...
+    00:00:01.411 nxserverlib: config(0x5c8650) registering as '1,00x204a16,config'
+### 00:00:04.253 application_masterservice pid=729 tid=0x7713e000 WindowManager(772): Found 1 document engines
+    00:00:01.644 nxserverlib: SettingsService(0x5daa78) registering as '2,0x5542a270x169c39e2,SettingsService'
+### 00:00:04.363 settings_settingsservice pid=753 tid=0x77262490 Settings(375): current format = 34, val=720p60Hz
+### 00:00:04.364 settings_settingsservice pid=753 tid=0x77262490 Settings(435): Monitor doesn't support this format, finding other...
+    00:00:01.790 nxserverlib: changing HdmiOutput0 to 0 bit 444
+Starting Connectivity Service
+TRELLIS: ===================================
+TRELLIS: Platform Service.......Running.
+TRELLIS: Application Service....Running.
+TRELLIS: Media Service..........NOT Running.
+TRELLIS: TV Service.............NOT Running.
+TRELLIS: DTVKit TV Service......NOT Running.
+TRELLIS: Streaming Service......NOT Running.
+TRELLIS: Dummy TV Service.......NOT Running.
+TRELLIS: Connectivity Service...Running.
+TRELLIS: Settings Service.......Running.
+TRELLIS: Web Server.............NOT Running.
+TRELLIS: DiAL Service...........NOT Running.
+TRELLIS: Remote Server..........NOT Running.
+TRELLIS: ===================================
+    00:00:02.624 nxserverlib: virtual void Trellis::Connectiv(0x5dbff0) registering as '3,0x2eab49560xbb0b8b4,virtual void Trellis::Connectiv'
+NetApp: NetAppOpen(): Version 8.3.7.0 (1.120-160-g66d968b)
+ConnectivityService running...
+NetApp: Entered vntNetAppPrivateSetMTU eth0 to 1452
+udhcpc (v1.19.4) started
+Sending discover...
+### 00:00:06.361 settings_settingsservice pid=753 tid=0x76c954f0 SettingsServiceRegister(84): Unable to find server ConnectivityService
+### 00:00:07.038 settings_settingsservice pid=753 tid=0x76c954f0 SettingsServiceRegister(84): Unable to find server WebService
+    00:00:04.614 nxserverlib: 1064(0x5dc8c0) registering as '4,0xbd068c90x3e5d224d,1064'
+---------------------------CREATING DESKTOP SHELL----------------------
+ Display:  1280 720     - Format: 1     - StretchX: 1.000000    - StretchY: 1.000000    - ShouldStretch: 0
+ Graphics: 1280 720     - Format: 1     - MarginX: 0    - MarginY: 0
+NXPL_RegisterNexusDisplayPlatform data->hwInterface 0x50527b0
+[1064:1064:0101/000007:7736547:WARNING:proxy_service.cc(1378)] Failed to choose a system proxy settings fetcher for this platform.
+[1064:1113:0101/000007:7771051:WARNING:proxy_service.cc(888)] PAC support disabled because there is no system implementation
+Sending discover...
+[1124:1124:0101/000008:8693357:ERROR:renderer_main.cc(233)] Running without renderer sandbox
+Sending discover...
+ThangNN:VNTDeviceApi::writeFile /tmp/boot_complete
+    WebMediaPlayerBrcm::OnMediaError = 0
+[1064:1064:0101/000013:13289324:INFO:CONSOLE(403)] "http://update.vmp.tv/VNPTTECH/IP001HD", source: file:///usr/local/vnpt/apps/configuration/configuration.html?sessionIndex=0 (403)
+[1064:1064:0101/000013:13301162:INFO:CONSOLE(403)] "http://aaa.vmp.tv", source: file:///usr/local/vnpt/apps/configuration/configuration.html?sessionIndex=0 (403)
+[1064:1064:0101/000013:13349600:INFO:CONSOLE(392)] "getEnableWifiCallback -->{"id":5,"jsonrpc":"2.0","objectType":"IRPC::RPCResultObject","result":{"objectType":"BooleanObject","value":false},"__EP__":"ConnectivityService/207845"}", source: file:///usr/local/vnpt/apps/configuration/configuration.html?sessionIndex=0 (392)
+[1064:1064:0101/000013:13399274:INFO:CONSOLE(184)] "getCallback -->{"id":6,"jsonrpc":"2.0","objectType":"IRPC::RPCResultObject","result":{"gateway":"0.0.0.0","ipAddress":"0.0.0.0","ipMode":"IPMODE_DYNAMIC","linkState":"LINKSTATE_ACQUIRING","macAddress":"A0:65:18:8B:90:25","objectType":"Trellis::Connectivity::INetwork::NetworkInfo","primaryDNS":"0.0.0.0","secondaryDNS":"0.0.0.0","subnetMask":"0.0.0.0"},"__EP__":"ConnectivityService/207845"}", source: file:///usr/local/vnpt/apps/configuration/configuration.html?sessionIndex=0 (184)
+### 00:00:14.034 application_masterservice pid=729 tid=0x4f3194f0 MasterServiceManager(230): System boot complete......
+starting pid 1141, tty '/dev/ttyS0': '/sbin/getty -L 115200 ttyS0 vt102'
+    00:00:14.523 nxserverlib: status(0x666000) registering as '5,0x436c8d9c0x3a2adfda,status'
+Initialize basic config data from default values
+tr69c_stb: using acs url from command: http://172.16.1.166:8092
+TR69: ACS at http://172.16.1.166:8092
+Jan  1 00:00:17 user: Daemonizing process
+InitTask
+init protocol
+init BCMLibIF
+init Informer
+Reading MYTV settings file
+init xmpp
+ --- XMPP ---: 77870000
+ -- Connection:
+                Enable: 0
+                Username: 0122403S1F8B9025
+                Password: 4f93d18bf7270037216df8438e329542
+                Domain: 172.16.1.166
+                Resource: Smack
+ -- Server:
+                Enable: 1
+                Address: 172.16.1.166
+                Port: 5222
+
+(none) login: Init XMPP done
+start xmpp
+Creating xmpp thread
+Create xmmp thread succeed
+xmppState ready. Inform BOOT
+adding event =1
+Adding event <1> to informEvList, count is now <1>
+XMPP THREAD
+Before eventLoop
+Waiting for signal
+ Sending Inform
+getAllNotificaton notifyChanges = 0
+isAcsConnected: < NOT Connected to ACS>
+Connect to ACS at http://172.16.1.166:8092
+wget_Connect: proto:http
+wget_Connect: host:172.16.1.166
+wget_Connect: port:8092
+wget_Connect: uri:
+Jan  1 00:00:18 user: dns_lookup(172.16.1.166) = 172.16.1.166
+
+wget_Connect: after dns_lookup: ac1001a6
+EstablishConnection: err<Could not establish connection to host 172.16.1.166(172.16.1.166):8092>
+sendInform Failed: Could not establish connection to host 172.16.1.166(172.16.1.166):8092
+set delayed inform timer for 60000
+Did not reset periodic inform: enable<0>, interval<30>
+Sending discover...
+Sending discover...
+Sending discover...
