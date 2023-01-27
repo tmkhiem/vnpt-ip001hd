@@ -75,7 +75,7 @@ UART shell can be accessed via J301 header with the following pins respectively:
 
 In order to get to the system shell, some techniques need to be used. 
 
-There is an unpopulated micro SD slot at J402 header. I initially thought it was the pinout of the flash chip, however by overlaying the images of the front and back of PCB and aligning the vias, I found out that it is not. The 7241 SoC has at least two SD/eMMC interfaces, one of the goes to the eMMC while the other goes to the header. An interesting note is that this SD card slot connects to the first SD/eMMC bus of the SoC (or at least first in the device tree used to compile the OS), thus getting the first number when enumerated (`mmcblk0` instead of `mmcblk1`). 
+There is an unpopulated micro SD slot at J402 header. I initially thought it connects to the eMMC chip used by the devs to quickly flash a new image onto the eMMC, however by overlaying the images of the front and back of PCB and aligning the vias, I found out that it is not. The 7241 SoC has at least two SD/eMMC interfaces, one of the goes to the eMMC while the other goes to the header. An interesting note is that this SD card slot connects to the first SD/eMMC bus of the SoC (or at least first in the device tree used to compile the OS), thus getting the first number when enumerated (`mmcblk0` instead of `mmcblk1`). 
 
 You can solder a micro sd slot directly to J402 as its pinout is very straightforward. But for extra clarity, here's the J402 header pinout (from left to right, respectively):
 1. DAT1
