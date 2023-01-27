@@ -67,11 +67,11 @@ Some notes:
 
 ## Getting shells
 
-1. UART shell
+### 1. UART shell
 
 UART shell can be accessed via J301 header with the following pins respectively: GND-RX-TX-VCC. However, I did not manage to proceed further than the CFE shell, as the Linux system requires logging in. To access the CFE shell, press Ctrl+C repeatedly when powering up the device.
 
-2. System shell
+### 2. System shell
 
 In order to get to the system shell, some techniques need to be used. 
 
