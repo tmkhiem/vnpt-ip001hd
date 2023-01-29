@@ -1,4 +1,4 @@
-# vnpt-ipe001hd
+# vnpt-ip001hd
 VNPT Igate set top box IP001HD
 
 This repository contains data related to VNPT's IP001HD set-top box.
